@@ -4,25 +4,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
-        android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Witaj w aplikacji "
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView1" />
-    <ImageView
-        android:src="@drawable/welcomeimage"
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView1" />
-    <TextView
-        android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView2" />
+        android:id="@+id/PhoneNumberText"
+        android:text="1-xxx-xxx" />
     <Button
-        android:text="Button"
+        android:text="Translate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button1" />
+        android:id="@+id/TranslateButton" />
+    <Button
+        android:text="Call"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/CallButton" />
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar1"
+        android:progress="3"
+        android:max="17"
+        android:backgroundTint="#00000000" />
 </LinearLayout>
