@@ -13,6 +13,7 @@ obj
 *.suo
 *.user
 *.pfx
+*.log
 
 *_ReSharper.*/
 

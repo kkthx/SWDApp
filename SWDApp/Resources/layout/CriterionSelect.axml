@@ -23,20 +23,18 @@
             android:gravity="center"
             android:id="@+id/textView2" />
         <RadioGroup
-            android:minWidth="25px"
-            android:minHeight="25px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/criterionGroup">
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="true"
                 android:text="RadioButton"
                 android:id="@+id/criterion1" />
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:checked="true"
                 android:text="RadioButton"
                 android:id="@+id/criterionEqual" />
             <RadioButton
@@ -52,24 +50,24 @@
             android:progress="1"
             android:max="3"
             android:backgroundTint="#00000000" />
-      <TextView
-    android:text=""
-    android:textAppearance="?android:attr/textAppearanceMedium"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center"
-    android:id="@+id/criterionText" />
-      <TextView
-          android:text=""
-          android:textAppearance="?android:attr/textAppearanceMedium"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:gravity="center"
-          android:id="@+id/criterionTextValue" />
-    <Button
-        android:text="Dalej"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/button1" />
+        <TextView
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/criterionText" />
+        <TextView
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/criterionTextValue" />
+        <Button
+            android:text="Dalej"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/next" />
     </LinearLayout>
 </LinearLayout>

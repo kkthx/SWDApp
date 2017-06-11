@@ -18,12 +18,12 @@ namespace SWDApp
         // Factorial of number
         static Func<int, int> Factorial = x => x < 0 ? -1 : x == 1 || x == 0 ? 1 : x * Factorial(x - 1);
 
-        // key - value
-        Dictionary<int, int> criterionValues;
+        
 
         // list of  criterions (strings)
-        List<string> criterion;
-        List<int[]> criterionList;
+        List<string> criterionNames;
+        List<int[]> criterionPermutations;
+        List<int[]> criterionValuesMatrix;
 
         int currentCriterion;
         int firstCriterionValue;
@@ -31,13 +31,14 @@ namespace SWDApp
 
         public Criterions()
         {
-            criterion = new List<string>();
-            criterion.Add("Wygoda");
-            criterion.Add("Waga");
-            criterion.Add("Wodoodporność");
-            criterion.Add("Budowa");
+            criterionNames = new List<string>();
+            criterionNames.Add("Wygoda");
+            criterionNames.Add("Waga");
+            criterionNames.Add("Wodoodporność");
+            criterionNames.Add("Budowa");
 
-            criterionList = new List<int[]>();
+            criterionPermutations = new List<int[]>();
+            criterionValuesMatrix = new List<int[]>();
 
             currentCriterion = 0;
             calculateCriterions();
@@ -46,11 +47,11 @@ namespace SWDApp
         void calculateCriterions()
         {
             int a = 1, b = 2;
-            for (int i = 0; i < Factorial(criterion.Count - 1); i++)
+            for (int i = 0; i < Factorial(criterionNames.Count - 1); i++)
             {
-                criterionList.Add(new int[]{a-1, b-1});
+                criterionPermutations.Add(new int[]{a-1, b-1});
 
-                if (b >= criterion.Count)
+                if (b >= criterionNames.Count)
                 {
                     b = a + 1;
                     a++;
@@ -61,7 +62,7 @@ namespace SWDApp
 
         public bool nextCriterion()
         {
-            if (currentCriterion < Factorial(criterion.Count - 1))
+            if (currentCriterion <= criterionPermutations.Count)
             {
                 ++currentCriterion;
                 return true;
@@ -72,16 +73,27 @@ namespace SWDApp
 
         public string firstCriterion()
         {
-            return criterion[criterionList[currentCriterion][0]];
+            return criterionNames[criterionPermutations[currentCriterion][0]];
         }
 
         public string secondCriterion()
         {
-            return criterion[criterionList[currentCriterion][1]];
+            return criterionNames[criterionPermutations[currentCriterion][1]];
+        }
+
+        public bool saveRank(int rank)
+        {
+            return true;
+            if (rank < 1 || rank > 9)
+            return false;
+        }
+        public int G()
+        {
+            return currentCriterion;
         }
     }
 
-    class AHP
+    public class AHP
     {
         Criterions criterions;
         public AHP()
@@ -97,6 +109,16 @@ namespace SWDApp
         public string secondCriterion()
         {
             return criterions.secondCriterion();
+        }
+
+        public bool nextCriterion()
+        {
+            return criterions.nextCriterion();
+        }
+
+        public int getC()
+        {
+            return criterions.G();
         }
 
     }

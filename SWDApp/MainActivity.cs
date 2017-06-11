@@ -7,9 +7,17 @@ using System.Collections.Generic;
 
 using Newtonsoft.Json;
 using Android.Content;
+using System.Xml.Serialization;
+using System.Xml;
 
 namespace SWDApp
 {
+    [Application]
+    public class MyApp : Application
+    {
+        public static AHP ahp = new AHP();
+    }
+
     [Activity(Label = "SWDApp", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
@@ -24,14 +32,10 @@ namespace SWDApp
 
             TextView t1 = FindViewById<TextView>(Resource.Id.textView1);
             Button b1 = FindViewById<Button>(Resource.Id.mainNext);
-            AHP ahp = new AHP();
 
             b1.Click += (object sender, EventArgs e) =>
             {
-                Intent intent = new Intent(this, typeof(CriterionSelectActivity));
-                intent.PutExtra("ahp", JsonConvert.SerializeObject(ahp));
-
-                StartActivity(intent);
+                StartActivity(typeof(CriterionSelectActivity));
             };
 
 
