@@ -7,7 +7,6 @@ using System.Collections.Generic;
 
 using Newtonsoft.Json;
 using Android.Content;
-using Newtonsoft.Json;
 
 namespace SWDApp
 {

@@ -49,8 +49,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/seekBar1"
-            android:progress="3"
-            android:max="17"
+            android:progress="1"
+            android:max="3"
             android:backgroundTint="#00000000" />
+      <TextView
+    android:text=""
+    android:textAppearance="?android:attr/textAppearanceMedium"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:id="@+id/criterionText" />
+      <TextView
+          android:text=""
+          android:textAppearance="?android:attr/textAppearanceMedium"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:id="@+id/criterionTextValue" />
+    <Button
+        android:text="Dalej"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button1" />
     </LinearLayout>
 </LinearLayout>
