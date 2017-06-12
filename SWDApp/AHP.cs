@@ -62,17 +62,11 @@ namespace SWDApp
 
         void calculateComparisions()
         {
-            int a = 1, b = 2;
-            for (int i = 0; i < Factorial(comparisionNames.Count - 1); i++)
+            comparisionPermutations.Clear();
+            for (int i = 0; i < comparisionNames.Count; i++)
             {
-                comparisionPermutations.Add(new int[] { a - 1, b - 1 });
-
-                if (b >= comparisionNames.Count)
-                {
-                    b = a + 1;
-                    a++;
-                }
-                b++;
+                for (int j = i + 1; j < comparisionNames.Count; j++)
+                    comparisionPermutations.Add(new int[] { i, j });
             }
         }
 

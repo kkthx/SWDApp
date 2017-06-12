@@ -127,7 +127,11 @@ namespace SWDApp
                     }
                 }
 
-                if (ahp.nextDecision())
+                if (ahp.nextDecisionComparision())
+                {
+                    StartActivity(typeof(DecisionSelectActivity));
+                }
+                else if (ahp.nextDecision())
                     StartActivity(typeof(DecisionSelectActivity));
                 else
                 {
