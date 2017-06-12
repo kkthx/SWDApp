@@ -14,14 +14,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:id="@+id/textView1" />
+            android:id="@+id/title" />
         <TextView
             android:text="Zdecyduj które kryterium jest dla ciebie ważne"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:id="@+id/textView2" />
+            android:id="@+id/description" />
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

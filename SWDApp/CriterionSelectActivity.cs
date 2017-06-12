@@ -73,7 +73,7 @@ namespace SWDApp
                     criterionTextValue.Text = "";
                     criterionText.Text = "";
                 }
-                else 
+                else
                 {
                     criterionText.Enabled = true;
                     criterionTextValue.Enabled = true;
@@ -93,8 +93,34 @@ namespace SWDApp
 
             next.Click += (object sender, EventArgs e) =>
             {
-                ahp.nextCriterion();
-                StartActivity(typeof(CriterionSelectActivity));
+                if (criterionEqual.Checked)
+                    ahp.saveCriterion(1);
+                else
+                {
+                    switch (seekBar1.Progress)
+                    {
+                        case 0: //nieznacznie bardziej preferowane 
+                            ahp.saveCriterion(criterion1.Checked ? 3 : (decimal)1 / 3);
+                            break;
+                        case 1: //silniej preferowane
+                            ahp.saveCriterion(criterion1.Checked ? 5 : (decimal)1 / 5);
+                            break;
+                        case 2: //bardzo silnie preferowane
+                            ahp.saveCriterion(criterion1.Checked ? 5 : (decimal)1 / 5);
+                            break;
+                        case 3: //wyłącznie preferowane
+                            ahp.saveCriterion(criterion1.Checked ? 9 : (decimal)1 / 9);
+                            break;
+                        default:
+                            break;
+                    }
+
+                }
+
+                if (ahp.nextCriterion())
+                    StartActivity(typeof(CriterionSelectActivity));
+                else
+                    Toast.MakeText(this, "Go to decision comparision matrix", ToastLength.Short).Show();
             };
         }
 

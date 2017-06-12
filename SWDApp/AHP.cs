@@ -21,20 +21,26 @@ namespace SWDApp
         // list of values to compare (strings)
         List<string> comparisionNames;
         List<int[]> comparisionPermutations;
-        List<int[]> comparisionValuesMatrix;
+        List<decimal[]> comparisionValuesMatrix;
 
         int currentComparision;
 
 
         public int Count { get { return comparisionNames.Count; } }
-
+        public int Current { get { return currentComparision; } }
 
         public ComparisionMatrix(List<string> values)
         {
             comparisionNames = new List<string>(values);
 
             comparisionPermutations = new List<int[]>();
-            comparisionValuesMatrix = new List<int[]>();
+            comparisionValuesMatrix = new List<decimal[]>();
+            for (int i = 0; i < comparisionNames.Count; i++)
+            {
+                comparisionValuesMatrix.Add(new decimal[comparisionNames.Count]);
+                comparisionValuesMatrix[i][i] = 1;
+            }
+
 
             currentComparision = 0;
             calculateComparisions();
@@ -67,26 +73,23 @@ namespace SWDApp
                 return false;
         }
 
-        public string firstCriterion()
+        public string firstComparisionName()
         {
             return comparisionNames[comparisionPermutations[currentComparision][0]];
         }
 
-        public string secondCriterion()
+        public string secondComparisionName()
         {
             return comparisionNames[comparisionPermutations[currentComparision][1]];
         }
 
-        public bool saveRank(int rank)
+        public bool saveRank(decimal rank)
         {
+            comparisionValuesMatrix[comparisionPermutations[currentComparision][0]][comparisionPermutations[currentComparision][1]] = (decimal)rank;
+            comparisionValuesMatrix[comparisionPermutations[currentComparision][1]][comparisionPermutations[currentComparision][0]] = 1/ (decimal)rank;
             return true;
-            if (rank < 1 || rank > 9)
-            return false;
         }
-        public int G()
-        {
-            return currentComparision;
-        }
+
     }
 
     public class AHP
@@ -96,17 +99,23 @@ namespace SWDApp
         public AHP()
         {
             criterionMatrix = new ComparisionMatrix(new List<string>(new string[] {"Wygoda", "Waga", "Wodoodporność", "Budowa"}));
-            
+            decisionMatrix = new List<ComparisionMatrix>();
+            for(int i=0; i < criterionMatrix.Count; i++)
+            {
+                ComparisionMatrix c = new ComparisionMatrix
+                    (new List<string>(new string[] { "HIMOUNTAIN TAWOCHE 35+10", "SALEWA MOUNTAIN GUIDE PRO 38", "OSPREY VARIANT 37" }));
+                decisionMatrix.Add(c);
+            }
         }
 
         public string firstCriterion()
         {
-            return criterionMatrix.firstCriterion();
+            return criterionMatrix.firstComparisionName();
         }
 
         public string secondCriterion()
         {
-            return criterionMatrix.secondCriterion();
+            return criterionMatrix.secondComparisionName();
         }
 
         public bool nextCriterion()
@@ -116,8 +125,12 @@ namespace SWDApp
 
         public int getC()
         {
-            return criterionMatrix.G();
+            return criterionMatrix.Current;
         }
 
+        public bool saveCriterion(decimal rank)
+        {
+            return criterionMatrix.saveRank(rank);
+        }
     }
 }
