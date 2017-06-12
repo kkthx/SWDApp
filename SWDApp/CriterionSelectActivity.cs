@@ -86,6 +86,7 @@ namespace SWDApp
     ahp.criterionRank(3, 1),
     ahp.criterionRank(3, 2),
     ahp.criterionRank(3, 3)
+
     );
 
 
@@ -146,8 +147,19 @@ namespace SWDApp
                     StartActivity(typeof(CriterionSelectActivity));
                 else
                 {
+                    textView1.Text = string.Format(
+"sum  {0:0.00}   {1:0.00}   {2:0.00}   {3:0.00}\n" +
+"avg {4:0.00}   {5:0.00}   {6:0.00}   {7:0.00}\n" +
+"ci {8:0.00}   ",
+
+ahp.sum(0), ahp.sum(1), ahp.sum(2), ahp.sum(3),
+ahp.avg(0), ahp.avg(1), ahp.avg(2), ahp.avg(3),
+ahp.ci
+
+);
+
                     Toast.MakeText(this, "Go to decision comparision matrix", ToastLength.Short).Show();
-                    StartActivity(typeof(CriterionSelectActivity));
+                    //StartActivity(typeof(CriterionSelectActivity));
                 }
             };
         }
