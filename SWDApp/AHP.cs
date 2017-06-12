@@ -110,7 +110,7 @@ namespace SWDApp
 
         public bool isConsistent { get { return calculateConsistency() < (decimal)0.1 ? true : false; } }
 
-        public bool nextCriterion()
+        public bool nextComparision()
         {
             if (currentComparision < comparisionPermutations.Count - 1)
             {
@@ -171,7 +171,7 @@ namespace SWDApp
 
         public bool nextCriterion()
         {
-            return criterionMatrix.nextCriterion();
+            return criterionMatrix.nextComparision();
         }
 
         public int getC()

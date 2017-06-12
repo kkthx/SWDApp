@@ -19,8 +19,12 @@ namespace SWDApp
         AHP ahp;
 
         SeekBar seekBar1;
+
+        TextView title;
+        TextView description;
+
         TextView criterionText;
-        TextView criterionTextValue;
+        TextView criterionText2;
         TextView textView1;
 
         RadioGroup radioGroup;
@@ -46,8 +50,12 @@ namespace SWDApp
             ahp = MyApp.ahp;
 
             seekBar1 = FindViewById<SeekBar>(Resource.Id.seekBar1);
+
+            title = FindViewById<TextView>(Resource.Id.title);
+            description = FindViewById<TextView>(Resource.Id.description);
+
             criterionText = FindViewById<TextView>(Resource.Id.criterionText);
-            criterionTextValue = FindViewById<TextView>(Resource.Id.criterionTextValue);
+            criterionText2 = FindViewById<TextView>(Resource.Id.criterionText2);
             textView1 = FindViewById<TextView>(Resource.Id.textView1);
 
             radioGroup = FindViewById<RadioGroup>(Resource.Id.criterionGroup);
@@ -60,10 +68,15 @@ namespace SWDApp
 
             seekBar1.Enabled = false;
 
-            criterion1.Text = string.Format("{0} {1}", ahp.firstCriterion(), ahp.getC());
+            title.Text = "Wybór kryteriów";
+            description.Text = "Zdecyduj, które kryterium jest ważniejsze";
+
+            criterion1.Text = ahp.firstCriterion();
             criterionEqual.Text = "Jednakowa ważność obu kryteriów";
             criterion2.Text = ahp.secondCriterion();
 
+            criterionText.Text = string.Format("Kryterium \"{0}\" względem \"{1}\" jest", ahp.firstCriterion(), ahp.secondCriterion());
+            criterionText2.Text = "tak samo preferowane";
 
             textView1.Text = string.Format(
     "{0:0.00}   {1:0.00}   {2:0.00}   {3:0.00}\n" +
@@ -95,21 +108,17 @@ namespace SWDApp
                 if (criterionEqual.Checked)
                 {
                     seekBar1.Enabled = false;
-                    criterionText.Enabled = false;
-                    criterionTextValue.Enabled = false;
-                    criterionTextValue.Text = "";
-                    criterionText.Text = "";
+                    criterionText2.Text = "tak samo preferowane";
+                    criterionText.Text = string.Format("Kryterium \"{0}\" względem \"{1}\" jest", ahp.firstCriterion(), ahp.secondCriterion());
                 }
                 else
                 {
-                    criterionText.Enabled = true;
-                    criterionTextValue.Enabled = true;
                     seekBar1.Enabled = true;
 
                     if (criterion1.Checked)
-                        criterionText.Text = string.Format("\"{0}\" względem \"{1}\" jest", ahp.firstCriterion(), ahp.secondCriterion());
+                        criterionText.Text = string.Format("Kryterium \"{0}\" względem \"{1}\" jest", ahp.firstCriterion(), ahp.secondCriterion());
                     else
-                        criterionText.Text = string.Format("\"{0}\" względem \"{1}\" jest", ahp.secondCriterion(), ahp.firstCriterion());
+                        criterionText.Text = string.Format("Kryterium \"{0}\" względem \"{1}\" jest", ahp.secondCriterion(), ahp.firstCriterion());
 
                     criterionTextAssign(seekBar1.Progress);
                 }
@@ -169,19 +178,19 @@ ahp.ci
             switch (progress)
             {
                 case 0:
-                    criterionTextValue.Text = string.Format("nieznacznie bardziej preferowane {0} 0", progress);
+                    criterionText2.Text = "nieznacznie bardziej preferowane";
                     break;
                 case 1:
-                    criterionTextValue.Text = string.Format("silniej preferowane {0} 1", progress);
+                    criterionText2.Text = "silniej preferowane";
                     break;
                 case 2:
-                    criterionTextValue.Text = string.Format("bardzo silnie preferowane {0} 2", progress);
+                    criterionText2.Text = "bardzo silnie preferowane";
                     break;
                 case 3:
-                    criterionTextValue.Text = string.Format("wyłącznie preferowane {0} 3", progress);
+                    criterionText2.Text = "wyłącznie preferowane";
                     break;
                 default:
-                    criterionTextValue.Text = "";
+                    criterionText2.Text = "tak samo preferowane";
                     break;
             }
         }

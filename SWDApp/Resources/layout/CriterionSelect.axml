@@ -9,14 +9,14 @@
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout1">
         <TextView
-            android:text="Wybór kryteriów"
+            android:text="title"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:id="@+id/title" />
         <TextView
-            android:text="Zdecyduj które kryterium jest dla ciebie ważne"
+            android:text="description"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,29 +51,29 @@
             android:max="3"
             android:backgroundTint="#00000000" />
         <TextView
-            android:text=""
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="criterionText"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:id="@+id/criterionText" />
         <TextView
-            android:text=""
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="criterionTextValue"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:id="@+id/criterionTextValue" />
+            android:id="@+id/criterionText2" />
         <Button
             android:text="Dalej"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/next" />
-      <TextView
-    android:text=""
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center"
-    android:id="@+id/textView1" />
+        <TextView
+            android:text="textView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/textView1" />
     </LinearLayout>
 </LinearLayout>
