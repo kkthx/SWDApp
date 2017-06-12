@@ -38,15 +38,8 @@ namespace SWDApp
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
-            //test if all criterions selected
             SetContentView(Resource.Layout.Selector);
-            //else go next
-            //StartActivity(typeof(DecisionSelectActivity));
 
-
-
-            //get data from previous activity, deserializing it to object
             ahp = MyApp.ahp;
 
             seekBar1 = FindViewById<SeekBar>(Resource.Id.seekBar1);

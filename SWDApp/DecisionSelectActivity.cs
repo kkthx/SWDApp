@@ -68,13 +68,13 @@ namespace SWDApp
             seekBar1.Enabled = false;
 
             title.Text = "Wybór decyzji";
-            description.Text = string.Format("Zdecyduj, który wybór jest lepszy pod względem kryterium \"{0}\"", "a");
+            description.Text = string.Format("Zdecyduj, który wybór jest lepszy pod względem decyzji \"{0}\"", ahp.currentDecisionName);
 
-            criterion1.Text = ahp.firstCriterion();
+            criterion1.Text = ahp.firstDecisionComparision();
             criterionEqual.Text = "Jednakowa ważność obu decyzji";
-            criterion2.Text = ahp.secondCriterion();
+            criterion2.Text = ahp.secondDecisionComparision();
 
-            criterionText.Text = string.Format("\"{0}\" względem \"{1}\" jest", ahp.firstCriterion(), ahp.secondCriterion());
+            criterionText.Text = string.Format("\"{0}\" względem \"{1}\" jest", ahp.firstDecisionComparision(), ahp.secondDecisionComparision());
             criterionText2.Text = "tak samo preferowany";
 
 
@@ -84,16 +84,16 @@ namespace SWDApp
                 {
                     seekBar1.Enabled = false;
                     criterionText2.Text = "tak samo preferowany";
-                    criterionText.Text = string.Format("Kryterium \"{0}\" względem \"{1}\" jest", ahp.firstCriterion(), ahp.secondCriterion());
+                    criterionText.Text = string.Format("Kryterium \"{0}\" względem \"{1}\" jest", ahp.firstDecisionComparision(), ahp.secondDecisionComparision());
                 }
                 else
                 {
                     seekBar1.Enabled = true;
 
                     if (criterion1.Checked)
-                        criterionText.Text = string.Format("\"{0}\" względem \"{1}\" jest", ahp.firstCriterion(), ahp.secondCriterion());
+                        criterionText.Text = string.Format("\"{0}\" względem \"{1}\" jest", ahp.firstDecisionComparision(), ahp.secondDecisionComparision());
                     else
-                        criterionText.Text = string.Format("\"{0}\" względem \"{1}\" jest", ahp.secondCriterion(), ahp.firstCriterion());
+                        criterionText.Text = string.Format("\"{0}\" względem \"{1}\" jest", ahp.secondDecisionComparision(), ahp.firstDecisionComparision());
 
                     criterionTextAssign(seekBar1.Progress);
                 }
@@ -105,30 +105,30 @@ namespace SWDApp
             next.Click += (object sender, EventArgs e) =>
             {
                 if (criterionEqual.Checked)
-                    ahp.saveCriterion(1);
+                    ahp.saveDecisionComparision(1);
                 else
                 {
                     switch (seekBar1.Progress)
                     {
                         case 0: //nieznacznie bardziej preferowane 
-                            ahp.saveCriterion(criterion1.Checked ? 3 : (decimal)1 / 3);
+                            ahp.saveDecisionComparision(criterion1.Checked ? 3 : (decimal)1 / 3);
                             break;
                         case 1: //silniej preferowane
-                            ahp.saveCriterion(criterion1.Checked ? 5 : (decimal)1 / 5);
+                            ahp.saveDecisionComparision(criterion1.Checked ? 5 : (decimal)1 / 5);
                             break;
                         case 2: //bardzo silnie preferowane
-                            ahp.saveCriterion(criterion1.Checked ? 5 : (decimal)1 / 5);
+                            ahp.saveDecisionComparision(criterion1.Checked ? 5 : (decimal)1 / 5);
                             break;
                         case 3: //wyłącznie preferowane
-                            ahp.saveCriterion(criterion1.Checked ? 9 : (decimal)1 / 9);
+                            ahp.saveDecisionComparision(criterion1.Checked ? 9 : (decimal)1 / 9);
                             break;
                         default:
                             break;
                     }
                 }
 
-                if (ahp.nextCriterion())
-                    StartActivity(typeof(CriterionSelectActivity));
+                if (ahp.nextDecision())
+                    StartActivity(typeof(DecisionSelectActivity));
                 else
                 {
                     textView1.Text = string.Format(
@@ -142,8 +142,8 @@ ahp.ci
 
 );
 
-                    Toast.MakeText(this, "Go to decision comparision matrix", ToastLength.Short).Show();
-                    //StartActivity(typeof(CriterionSelectActivity));
+                    Toast.MakeText(this, "FINISHED", ToastLength.Short).Show();
+                    StartActivity(typeof(CalculatedRank));
                 }
             };
         }

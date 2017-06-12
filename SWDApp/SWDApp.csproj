@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AHP.cs" />
+    <Compile Include="CalculatedRank.cs" />
     <Compile Include="CriterionSelectActivity.cs" />
     <Compile Include="DecisionSelectActivity.cs" />
     <Compile Include="MainActivity.cs" />
@@ -66,6 +67,9 @@
     <Compile Include="Resources\Resource.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\layout\CalculatedRank.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <None Include="GettingStarted.Xamarin" />
     <AndroidResource Include="Resources\layout\Selector.axml">
       <SubType>Designer</SubType>

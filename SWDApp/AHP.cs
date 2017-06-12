@@ -33,6 +33,7 @@ namespace SWDApp
 
         public int Count { get { return comparisionNames.Count; } }
         public int Current { get { return currentComparision; } }
+        public List<string> Name { get { return comparisionNames; } }
 
         public ComparisionMatrix(List<string> values)
         {
@@ -147,8 +148,10 @@ namespace SWDApp
     {
         ComparisionMatrix criterionMatrix;
         List<ComparisionMatrix> decisionMatrix;
+        int decisionCount;
         public AHP()
         {
+            decisionCount = 0;
             criterionMatrix = new ComparisionMatrix(new List<string>(new string[] { "Wygoda", "Waga", "Wodoodporność", "Budowa" }));
             decisionMatrix = new List<ComparisionMatrix>();
             for (int i = 0; i < criterionMatrix.Count; i++)
@@ -176,7 +179,7 @@ namespace SWDApp
             return criterionMatrix.nextComparision();
         }
 
-        public decimal ci {  get { return criterionMatrix.calculateConsistency();  } }
+        public decimal ci { get { return criterionMatrix.calculateConsistency(); } }
         public decimal criterionRank(int i, int j) { return criterionMatrix.comparisionValuesMatrix[i][j]; }
         public decimal sum(int j) { return criterionMatrix.sumOfColumn[j]; }
         public decimal avg(int j) { return criterionMatrix.averageOfRow[j]; }
@@ -185,12 +188,38 @@ namespace SWDApp
             return criterionMatrix.saveRank(rank);
         }
 
-        public bool saveDecision(decimal rank)
+        //decisions
+        public string firstDecisionComparision()
         {
-            return criterionMatrix.saveRank(rank);
+            return decisionMatrix[decisionCount].firstComparisionName();
         }
 
-        //decisions
+        public string secondDecisionComparision()
+        {
+            return decisionMatrix[decisionCount].secondComparisionName();
+        }
+
+        public bool nextDecisionComparision()
+        {
+            return decisionMatrix[decisionCount].nextComparision();
+        }
+
+        public bool nextDecision()
+        {
+            if (decisionCount < decisionMatrix.Count - 1)
+            {
+                decisionCount++;
+                return true;
+            }
+            return false;
+        }
+
+        public bool saveDecisionComparision(decimal rank)
+        {
+            return decisionMatrix[decisionCount].saveRank(rank);
+        }
+
+        public string currentDecisionName { get { return criterionMatrix.Name[decisionCount]; } }
 
 
 
