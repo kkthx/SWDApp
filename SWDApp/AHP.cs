@@ -13,45 +13,41 @@ using Android.Widget;
 namespace SWDApp
 {
 
-    class Criterions
+    class ComparisionMatrix
     {
         // Factorial of number
         static Func<int, int> Factorial = x => x < 0 ? -1 : x == 1 || x == 0 ? 1 : x * Factorial(x - 1);
 
-        
+        // list of values to compare (strings)
+        List<string> comparisionNames;
+        List<int[]> comparisionPermutations;
+        List<int[]> comparisionValuesMatrix;
 
-        // list of  criterions (strings)
-        List<string> criterionNames;
-        List<int[]> criterionPermutations;
-        List<int[]> criterionValuesMatrix;
+        int currentComparision;
 
-        int currentCriterion;
-        int firstCriterionValue;
-        int secondCriterionValue;
 
-        public Criterions()
+        public int Count { get { return comparisionNames.Count; } }
+
+
+        public ComparisionMatrix(List<string> values)
         {
-            criterionNames = new List<string>();
-            criterionNames.Add("Wygoda");
-            criterionNames.Add("Waga");
-            criterionNames.Add("Wodoodporność");
-            criterionNames.Add("Budowa");
+            comparisionNames = new List<string>(values);
 
-            criterionPermutations = new List<int[]>();
-            criterionValuesMatrix = new List<int[]>();
+            comparisionPermutations = new List<int[]>();
+            comparisionValuesMatrix = new List<int[]>();
 
-            currentCriterion = 0;
-            calculateCriterions();
+            currentComparision = 0;
+            calculateComparisions();
         }
 
-        void calculateCriterions()
+        void calculateComparisions()
         {
             int a = 1, b = 2;
-            for (int i = 0; i < Factorial(criterionNames.Count - 1); i++)
+            for (int i = 0; i < Factorial(comparisionNames.Count - 1); i++)
             {
-                criterionPermutations.Add(new int[]{a-1, b-1});
+                comparisionPermutations.Add(new int[]{a-1, b-1});
 
-                if (b >= criterionNames.Count)
+                if (b >= comparisionNames.Count)
                 {
                     b = a + 1;
                     a++;
@@ -62,9 +58,9 @@ namespace SWDApp
 
         public bool nextCriterion()
         {
-            if (currentCriterion <= criterionPermutations.Count)
+            if (currentComparision < comparisionPermutations.Count-1)
             {
-                ++currentCriterion;
+                ++currentComparision;
                 return true;
             }
             else
@@ -73,12 +69,12 @@ namespace SWDApp
 
         public string firstCriterion()
         {
-            return criterionNames[criterionPermutations[currentCriterion][0]];
+            return comparisionNames[comparisionPermutations[currentComparision][0]];
         }
 
         public string secondCriterion()
         {
-            return criterionNames[criterionPermutations[currentCriterion][1]];
+            return comparisionNames[comparisionPermutations[currentComparision][1]];
         }
 
         public bool saveRank(int rank)
@@ -89,36 +85,38 @@ namespace SWDApp
         }
         public int G()
         {
-            return currentCriterion;
+            return currentComparision;
         }
     }
 
     public class AHP
     {
-        Criterions criterions;
+        ComparisionMatrix criterionMatrix;
+        List<ComparisionMatrix> decisionMatrix;
         public AHP()
         {
-            criterions = new Criterions();
+            criterionMatrix = new ComparisionMatrix(new List<string>(new string[] {"Wygoda", "Waga", "Wodoodporność", "Budowa"}));
+            
         }
 
         public string firstCriterion()
         {
-            return criterions.firstCriterion();
+            return criterionMatrix.firstCriterion();
         }
 
         public string secondCriterion()
         {
-            return criterions.secondCriterion();
+            return criterionMatrix.secondCriterion();
         }
 
         public bool nextCriterion()
         {
-            return criterions.nextCriterion();
+            return criterionMatrix.nextCriterion();
         }
 
         public int getC()
         {
-            return criterions.G();
+            return criterionMatrix.G();
         }
 
     }
