@@ -9,12 +9,11 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Newtonsoft.Json;
 
 namespace SWDApp
 {
-    [Activity(Label = "CriterionSelectActivity")]
-    public class CriterionSelectActivity : Activity
+    [Activity(Label = "DecisionSelectActivity")]
+    public class DecisionSelectActivity : Activity
     {
         AHP ahp;
 
@@ -68,39 +67,15 @@ namespace SWDApp
 
             seekBar1.Enabled = false;
 
-            title.Text = "Wybór kryteriów";
-            description.Text = "Zdecyduj, które kryterium jest ważniejsze";
+            title.Text = "Wybór decyzji";
+            description.Text = string.Format("Zdecyduj, który wybór jest lepszy pod względem kryterium \"{0}\"", "a");
 
             criterion1.Text = ahp.firstCriterion();
-            criterionEqual.Text = "Jednakowa ważność obu kryteriów";
+            criterionEqual.Text = "Jednakowa ważność obu decyzji";
             criterion2.Text = ahp.secondCriterion();
 
-            criterionText.Text = string.Format("Kryterium \"{0}\" względem \"{1}\" jest", ahp.firstCriterion(), ahp.secondCriterion());
-            criterionText2.Text = "tak samo preferowane";
-
-            textView1.Text = string.Format(
-    "{0:0.00}   {1:0.00}   {2:0.00}   {3:0.00}\n" +
-    "{4:0.00}   {5:0.00}   {6:0.00}   {7:0.00}\n" +
-    "{8:0.00}   {9:0.00}   {10:0.00}   {11:0.00}\n" +
-    "{12:0.00}   {13:0.00}   {14:0.00}   {15:0.00}\n",
-    ahp.criterionRank(0, 0),
-    ahp.criterionRank(0, 1),
-    ahp.criterionRank(0, 2),
-    ahp.criterionRank(0, 3),
-    ahp.criterionRank(1, 0),
-    ahp.criterionRank(1, 1),
-    ahp.criterionRank(1, 2),
-    ahp.criterionRank(1, 3),
-    ahp.criterionRank(2, 0),
-    ahp.criterionRank(2, 1),
-    ahp.criterionRank(2, 2),
-    ahp.criterionRank(2, 3),
-    ahp.criterionRank(3, 0),
-    ahp.criterionRank(3, 1),
-    ahp.criterionRank(3, 2),
-    ahp.criterionRank(3, 3)
-
-    );
+            criterionText.Text = string.Format("\"{0}\" względem \"{1}\" jest", ahp.firstCriterion(), ahp.secondCriterion());
+            criterionText2.Text = "tak samo preferowany";
 
 
             radioGroup.CheckedChange += (object sender, RadioGroup.CheckedChangeEventArgs e) =>
@@ -108,7 +83,7 @@ namespace SWDApp
                 if (criterionEqual.Checked)
                 {
                     seekBar1.Enabled = false;
-                    criterionText2.Text = "tak samo preferowane";
+                    criterionText2.Text = "tak samo preferowany";
                     criterionText.Text = string.Format("Kryterium \"{0}\" względem \"{1}\" jest", ahp.firstCriterion(), ahp.secondCriterion());
                 }
                 else
@@ -116,9 +91,9 @@ namespace SWDApp
                     seekBar1.Enabled = true;
 
                     if (criterion1.Checked)
-                        criterionText.Text = string.Format("Kryterium \"{0}\" względem \"{1}\" jest", ahp.firstCriterion(), ahp.secondCriterion());
+                        criterionText.Text = string.Format("\"{0}\" względem \"{1}\" jest", ahp.firstCriterion(), ahp.secondCriterion());
                     else
-                        criterionText.Text = string.Format("Kryterium \"{0}\" względem \"{1}\" jest", ahp.secondCriterion(), ahp.firstCriterion());
+                        criterionText.Text = string.Format("\"{0}\" względem \"{1}\" jest", ahp.secondCriterion(), ahp.firstCriterion());
 
                     criterionTextAssign(seekBar1.Progress);
                 }
@@ -168,7 +143,7 @@ ahp.ci
 );
 
                     Toast.MakeText(this, "Go to decision comparision matrix", ToastLength.Short).Show();
-                    StartActivity(typeof(DecisionSelectActivity));
+                    //StartActivity(typeof(CriterionSelectActivity));
                 }
             };
         }
@@ -178,19 +153,19 @@ ahp.ci
             switch (progress)
             {
                 case 0:
-                    criterionText2.Text = "nieznacznie bardziej preferowane";
+                    criterionText2.Text = "nieznacznie bardziej preferowany";
                     break;
                 case 1:
-                    criterionText2.Text = "silniej preferowane";
+                    criterionText2.Text = "silniej preferowany";
                     break;
                 case 2:
-                    criterionText2.Text = "bardzo silnie preferowane";
+                    criterionText2.Text = "bardzo silnie preferowany";
                     break;
                 case 3:
-                    criterionText2.Text = "wyłącznie preferowane";
+                    criterionText2.Text = "wyłącznie preferowany";
                     break;
                 default:
-                    criterionText2.Text = "tak samo preferowane";
+                    criterionText2.Text = "tak samo preferowany";
                     break;
             }
         }

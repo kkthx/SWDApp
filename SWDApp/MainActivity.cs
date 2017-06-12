@@ -9,13 +9,21 @@ using Newtonsoft.Json;
 using Android.Content;
 using System.Xml.Serialization;
 using System.Xml;
+using Android.Runtime;
 
 namespace SWDApp
 {
     [Application]
-    public class MyApp : Application
+    class MyApp : Application
     {
-        public static AHP ahp = new AHP();
+        public static AHP ahp;
+        public MyApp(IntPtr handle, JniHandleOwnership ownerShip) : base(handle, ownerShip) { }
+
+        public override void OnCreate()
+        {
+            base.OnCreate();
+            ahp = new AHP();
+        }
     }
 
     [Activity(Label = "SWDApp", MainLauncher = true, Icon = "@drawable/icon")]
@@ -28,7 +36,7 @@ namespace SWDApp
             base.OnCreate(bundle);
 
             // Set our view from the "main" layout resource
-            SetContentView (Resource.Layout.Main);
+            SetContentView(Resource.Layout.Main);
 
             TextView t1 = FindViewById<TextView>(Resource.Id.textView1);
             Button b1 = FindViewById<Button>(Resource.Id.mainNext);

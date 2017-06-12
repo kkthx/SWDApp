@@ -159,6 +159,8 @@ namespace SWDApp
             }
         }
 
+
+        // criterions
         public string firstCriterion()
         {
             return criterionMatrix.firstComparisionName();
@@ -174,11 +176,6 @@ namespace SWDApp
             return criterionMatrix.nextComparision();
         }
 
-        public int getC()
-        {
-            return criterionMatrix.Current;
-        }
-
         public decimal ci {  get { return criterionMatrix.calculateConsistency();  } }
         public decimal criterionRank(int i, int j) { return criterionMatrix.comparisionValuesMatrix[i][j]; }
         public decimal sum(int j) { return criterionMatrix.sumOfColumn[j]; }
@@ -187,5 +184,16 @@ namespace SWDApp
         {
             return criterionMatrix.saveRank(rank);
         }
+
+        public bool saveDecision(decimal rank)
+        {
+            return criterionMatrix.saveRank(rank);
+        }
+
+        //decisions
+
+
+
+
     }
 }
