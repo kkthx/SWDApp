@@ -21,6 +21,7 @@ namespace SWDApp
         SeekBar seekBar1;
         TextView criterionText;
         TextView criterionTextValue;
+        TextView textView1;
 
         RadioGroup radioGroup;
         RadioButton checkedCriterion;
@@ -47,6 +48,7 @@ namespace SWDApp
             seekBar1 = FindViewById<SeekBar>(Resource.Id.seekBar1);
             criterionText = FindViewById<TextView>(Resource.Id.criterionText);
             criterionTextValue = FindViewById<TextView>(Resource.Id.criterionTextValue);
+            textView1 = FindViewById<TextView>(Resource.Id.textView1);
 
             radioGroup = FindViewById<RadioGroup>(Resource.Id.criterionGroup);
             checkedCriterion = FindViewById<RadioButton>(radioGroup.CheckedRadioButtonId);
@@ -61,6 +63,30 @@ namespace SWDApp
             criterion1.Text = string.Format("{0} {1}", ahp.firstCriterion(), ahp.getC());
             criterionEqual.Text = "Jednakowa ważność obu kryteriów";
             criterion2.Text = ahp.secondCriterion();
+
+
+            textView1.Text = string.Format(
+    "{0:0.00}   {1:0.00}   {2:0.00}   {3:0.00}\n" +
+    "{4:0.00}   {5:0.00}   {6:0.00}   {7:0.00}\n" +
+    "{8:0.00}   {9:0.00}   {10:0.00}   {11:0.00}\n" +
+    "{12:0.00}   {13:0.00}   {14:0.00}   {15:0.00}\n",
+    ahp.criterionRank(0, 0),
+    ahp.criterionRank(0, 1),
+    ahp.criterionRank(0, 2),
+    ahp.criterionRank(0, 3),
+    ahp.criterionRank(1, 0),
+    ahp.criterionRank(1, 1),
+    ahp.criterionRank(1, 2),
+    ahp.criterionRank(1, 3),
+    ahp.criterionRank(2, 0),
+    ahp.criterionRank(2, 1),
+    ahp.criterionRank(2, 2),
+    ahp.criterionRank(2, 3),
+    ahp.criterionRank(3, 0),
+    ahp.criterionRank(3, 1),
+    ahp.criterionRank(3, 2),
+    ahp.criterionRank(3, 3)
+    );
 
 
             radioGroup.CheckedChange += (object sender, RadioGroup.CheckedChangeEventArgs e) =>
@@ -114,13 +140,15 @@ namespace SWDApp
                         default:
                             break;
                     }
-
                 }
 
                 if (ahp.nextCriterion())
                     StartActivity(typeof(CriterionSelectActivity));
                 else
+                {
                     Toast.MakeText(this, "Go to decision comparision matrix", ToastLength.Short).Show();
+                    StartActivity(typeof(CriterionSelectActivity));
+                }
             };
         }
 

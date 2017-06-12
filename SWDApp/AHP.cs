@@ -21,7 +21,7 @@ namespace SWDApp
         // list of values to compare (strings)
         List<string> comparisionNames;
         List<int[]> comparisionPermutations;
-        List<decimal[]> comparisionValuesMatrix;
+        public List<decimal[]> comparisionValuesMatrix { get; }
 
         int currentComparision;
 
@@ -128,6 +128,7 @@ namespace SWDApp
             return criterionMatrix.Current;
         }
 
+        public decimal criterionRank(int i, int j) { return criterionMatrix.comparisionValuesMatrix[i][j]; }
         public bool saveCriterion(decimal rank)
         {
             return criterionMatrix.saveRank(rank);
