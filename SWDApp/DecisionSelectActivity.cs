@@ -77,6 +77,21 @@ namespace SWDApp
             criterionText.Text = string.Format("\"{0}\" względem \"{1}\" jest", ahp.firstDecisionComparision(), ahp.secondDecisionComparision());
             criterionText2.Text = "tak samo preferowany";
 
+            textView1.Text = string.Format(
+"{0:0.00}   {1:0.00}   {2:0.00}\n" +
+"{3:0.00}   {4:0.00}   {5:0.00}\n" +
+"{6:0.00}   {7:0.00}   {8:0.00}\n",
+ahp.decisionRank(ahp.currentDecisionCount, 0, 0),
+ahp.decisionRank(ahp.currentDecisionCount, 0, 1),
+ahp.decisionRank(ahp.currentDecisionCount, 0, 2),
+ahp.decisionRank(ahp.currentDecisionCount, 1, 0),
+ahp.decisionRank(ahp.currentDecisionCount, 1, 1),
+ahp.decisionRank(ahp.currentDecisionCount, 1, 2),
+ahp.decisionRank(ahp.currentDecisionCount, 2, 0),
+ahp.decisionRank(ahp.currentDecisionCount, 2, 1),
+ahp.decisionRank(ahp.currentDecisionCount, 2, 2)
+);
+
 
             radioGroup.CheckedChange += (object sender, RadioGroup.CheckedChangeEventArgs e) =>
             {
@@ -132,7 +147,10 @@ namespace SWDApp
                     StartActivity(typeof(DecisionSelectActivity));
                 }
                 else if (ahp.nextDecision())
+                {
+                    Toast.MakeText(this, "Next decision...", ToastLength.Short).Show();
                     StartActivity(typeof(DecisionSelectActivity));
+                }
                 else
                 {
                     textView1.Text = string.Format(

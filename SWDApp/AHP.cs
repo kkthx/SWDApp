@@ -181,6 +181,7 @@ namespace SWDApp
         {
             return criterionMatrix.saveRank(rank);
         }
+        public int criterionCount { get { return criterionMatrix.Count; } }
 
         //decisions
         public string firstDecisionComparision()
@@ -208,13 +209,29 @@ namespace SWDApp
             return false;
         }
 
+        public decimal dci(int l) { return decisionMatrix[l].calculateConsistency(); }
+        public decimal decisionRank(int l, int i, int j) { return decisionMatrix[l].comparisionValuesMatrix[i][j]; }
+        public decimal dsum(int l, int j) { return decisionMatrix[l].sumOfColumn[j]; }
+        public decimal davg(int l, int j) { return decisionMatrix[l].averageOfRow[j]; }
+
         public bool saveDecisionComparision(decimal rank)
         {
             return decisionMatrix[decisionCount].saveRank(rank);
         }
 
         public string currentDecisionName { get { return criterionMatrix.Name[decisionCount]; } }
+        public string decisionName(int num) { return decisionMatrix[0].Name[num]; }
+        public int currentDecisionCount { get { return decisionCount; } }
 
+        public decimal rank(int num)
+        {
+            decimal val = 0;
+            for (int i = 0; i < criterionMatrix.Count; i++)
+            {
+                val += criterionMatrix.averageOfRow[i] * decisionMatrix[i].averageOfRow[num];
+            }
+            return val;
+        }
 
 
 
