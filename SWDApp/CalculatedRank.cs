@@ -18,6 +18,7 @@ namespace SWDApp
         AHP ahp;
 
         TextView textView1;
+        ImageView bestDecision;
         Button button1;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -28,6 +29,7 @@ namespace SWDApp
             ahp = MyApp.ahp;
 
             textView1 = FindViewById<TextView>(Resource.Id.textView1);
+            bestDecision = FindViewById<ImageView>(Resource.Id.bestDecision);
             button1 = FindViewById<Button>(Resource.Id.button1);
 
             /*
@@ -106,11 +108,33 @@ ahp.dci(jjjjj));
    ahp.rank(0), ahp.rank(1), ahp.rank(2)
    );
    */
-            textView1.Text += string.Format("\n rank:\n");
-            textView1.Text += string.Format("{0}: {1:0.000}%\n", ahp.decisionName(0), ahp.rank(0)*100);
+            List<decimal> findMax = new List<decimal>();
+            findMax.Add(ahp.rank(0));
+            findMax.Add(ahp.rank(1));
+            findMax.Add(ahp.rank(2));
+            textView1.Text = string.Format("Ranking:\n");
+            textView1.Text += string.Format("{0}: {1:0.000}%\n", ahp.decisionName(0), ahp.rank(0) * 100);
             textView1.Text += string.Format("{0}: {1:0.000}%\n", ahp.decisionName(1), ahp.rank(1) * 100);
             textView1.Text += string.Format("{0}: {1:0.000}%\n", ahp.decisionName(2), ahp.rank(2) * 100);
 
+            textView1.Text += string.Format("\nNajlepszy wybór:\n{0}\n{1:0.000}%\n", ahp.decisionName(findMax.IndexOf(findMax.Max())), findMax.Max() * 100);
+
+            switch(findMax.IndexOf(findMax.Max()))
+            {
+                case 0:
+                    bestDecision.SetImageResource(Resource.Drawable.tawoche);
+                    break;
+                case 1:
+                    bestDecision.SetImageResource(Resource.Drawable.glide);
+                    break;
+                case 2:
+                    bestDecision.SetImageResource(Resource.Drawable.variant);
+                    break;
+                default:
+                    bestDecision.SetImageResource(Resource.Drawable.Icon);
+                    break;
+            }
+            
             button1.Click += (object sender, EventArgs e) =>
             {
                 this.FinishAffinity();
