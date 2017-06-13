@@ -4,6 +4,8 @@ Resource.designer.cs
 
 bin
 obj
+html
+latex
 
 *.pidb
 *.userprefs
