@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AHP.cs" />
+    <Compile Include="InitialSelection.cs" />
     <Compile Include="CalculatedRank.cs" />
     <Compile Include="CriterionSelectActivity.cs" />
     <Compile Include="DecisionSelectActivity.cs" />
@@ -77,6 +78,9 @@
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
+    <AndroidResource Include="Resources\layout\InitialSelector.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">

@@ -109,13 +109,19 @@ ahp.dci(jjjjj));
    );
    */
             List<decimal> findMax = new List<decimal>();
-            findMax.Add(ahp.rank(0));
-            findMax.Add(ahp.rank(1));
-            findMax.Add(ahp.rank(2));
-            textView1.Text = string.Format("Ranking:\n");
-            textView1.Text += string.Format("{0}: {1:0.000}%\n", ahp.decisionName(0), ahp.rank(0) * 100);
-            textView1.Text += string.Format("{0}: {1:0.000}%\n", ahp.decisionName(1), ahp.rank(1) * 100);
-            textView1.Text += string.Format("{0}: {1:0.000}%\n", ahp.decisionName(2), ahp.rank(2) * 100);
+
+            for (int i=0; i<ahp.decisionCount;i++)
+            {
+                findMax.Add(ahp.rank(i));
+            }
+            //ahp.crit
+            // w zaleznosci od ilosci kryteriowwwwwww
+            textView1.Text = string.Format("Ranking: deccnt={0} critcnt={1}\n", ahp.decisionCount, ahp.criterionCount);
+            for (int i = 0; i < ahp.decisionCount; i++)
+            {
+                textView1.Text += string.Format("{0}: {1:0.000}%\n", ahp.decisionName(i), ahp.rank(i) * 100);
+            }
+
 
             textView1.Text += string.Format("\nNajlepszy wybór:\n{0}\n{1:0.000}%\n", ahp.decisionName(findMax.IndexOf(findMax.Max())), findMax.Max() * 100);
 

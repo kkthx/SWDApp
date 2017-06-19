@@ -22,7 +22,7 @@ namespace SWDApp
         public override void OnCreate()
         {
             base.OnCreate();
-            ahp = new AHP();
+            
         }
     }
 
@@ -40,10 +40,10 @@ namespace SWDApp
 
             TextView t1 = FindViewById<TextView>(Resource.Id.textView1);
             Button b1 = FindViewById<Button>(Resource.Id.mainNext);
-
+            //MyApp.ahp = new AHP();
             b1.Click += (object sender, EventArgs e) =>
             {
-                StartActivity(typeof(CriterionSelectActivity));
+                StartActivity(typeof(InitialSelection));
             };
 
 

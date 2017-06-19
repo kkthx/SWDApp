@@ -66,18 +66,19 @@ namespace SWDApp
             next = FindViewById<Button>(Resource.Id.next);
 
             seekBar1.Enabled = false;
+            textView1.Text = "";
 
-            title.Text = "Wybór decyzji";
-            description.Text = string.Format("Zdecyduj, który wybór jest lepszy pod względem decyzji \"{0}\"", ahp.currentDecisionName);
+            title.Text = "Wybór wariantów";
+            description.Text = string.Format("Zdecyduj, który wariant jest lepszy pod względem decyzji \"{0}\"", ahp.currentDecisionName);
 
             criterion1.Text = ahp.firstDecisionComparision();
             criterionEqual.Text = "Jednakowa ważność obu decyzji";
             criterion2.Text = ahp.secondDecisionComparision();
 
-            criterionText.Text = string.Format("\"{0}\" względem \"{1}\" jest", ahp.firstDecisionComparision(), ahp.secondDecisionComparision());
-            criterionText2.Text = "tak samo preferowany";
+            criterionText.Text = string.Format("Wariant \"{0}\"\njest tak samo preferowany względem\nwariantu \"{1}\"", ahp.firstDecisionComparision(), ahp.secondDecisionComparision());
+            criterionText2.Text = "";
 
-            textView1.Text = string.Format(
+         /*   textView1.Text = string.Format(
 "{0:0.00}   {1:0.00}   {2:0.00}\n" +
 "{3:0.00}   {4:0.00}   {5:0.00}\n" +
 "{6:0.00}   {7:0.00}   {8:0.00}\n",
@@ -90,7 +91,7 @@ ahp.decisionRank(ahp.currentDecisionCount, 1, 2),
 ahp.decisionRank(ahp.currentDecisionCount, 2, 0),
 ahp.decisionRank(ahp.currentDecisionCount, 2, 1),
 ahp.decisionRank(ahp.currentDecisionCount, 2, 2)
-);
+);*/
 
 
             radioGroup.CheckedChange += (object sender, RadioGroup.CheckedChangeEventArgs e) =>
@@ -98,18 +99,11 @@ ahp.decisionRank(ahp.currentDecisionCount, 2, 2)
                 if (criterionEqual.Checked)
                 {
                     seekBar1.Enabled = false;
-                    criterionText2.Text = "tak samo preferowany";
-                    criterionText.Text = string.Format("Kryterium \"{0}\" względem \"{1}\" jest", ahp.firstDecisionComparision(), ahp.secondDecisionComparision());
+                    criterionText.Text = string.Format("Wariant \"{0}\"\njest tak samo preferowany względem\nwariantu \"{1}\"", ahp.firstDecisionComparision(), ahp.secondDecisionComparision());
                 }
                 else
                 {
                     seekBar1.Enabled = true;
-
-                    if (criterion1.Checked)
-                        criterionText.Text = string.Format("\"{0}\" względem \"{1}\" jest", ahp.firstDecisionComparision(), ahp.secondDecisionComparision());
-                    else
-                        criterionText.Text = string.Format("\"{0}\" względem \"{1}\" jest", ahp.secondDecisionComparision(), ahp.firstDecisionComparision());
-
                     criterionTextAssign(seekBar1.Progress);
                 }
             };
@@ -123,6 +117,7 @@ ahp.decisionRank(ahp.currentDecisionCount, 2, 2)
                     ahp.saveDecisionComparision(1);
                 else
                 {
+
                     switch (seekBar1.Progress)
                     {
                         case 0: //nieznacznie bardziej preferowane 
@@ -148,12 +143,12 @@ ahp.decisionRank(ahp.currentDecisionCount, 2, 2)
                 }
                 else if (ahp.nextDecision())
                 {
-                    Toast.MakeText(this, "Next decision...", ToastLength.Short).Show();
+                    Toast.MakeText(this, "Następny wariant...", ToastLength.Short).Show();
                     StartActivity(typeof(DecisionSelectActivity));
                 }
                 else
                 {
-                    textView1.Text = string.Format(
+                  /*  textView1.Text = string.Format(
 "sum  {0:0.00}   {1:0.00}   {2:0.00}   {3:0.00}\n" +
 "avg {4:0.00}   {5:0.00}   {6:0.00}   {7:0.00}\n" +
 "ci {8:0.00}   ",
@@ -162,9 +157,9 @@ ahp.sum(0), ahp.sum(1), ahp.sum(2), ahp.sum(3),
 ahp.avg(0), ahp.avg(1), ahp.avg(2), ahp.avg(3),
 ahp.ci
 
-);
+);*/
 
-                    Toast.MakeText(this, "FINISHED", ToastLength.Short).Show();
+                    //Toast.MakeText(this, "FINISHED", ToastLength.Short).Show();
                     StartActivity(typeof(CalculatedRank));
                 }
             };
@@ -172,24 +167,36 @@ ahp.ci
 
         void criterionTextAssign(int progress)
         {
+            if (criterion1.Checked)
+                criterionText.Text = string.Format("Wariant \"{0}\"\njest ", ahp.firstDecisionComparision());
+            else
+                criterionText.Text = string.Format("Wariant \"{0}\"\njest ", ahp.secondDecisionComparision());
+
+
             switch (progress)
             {
                 case 0:
-                    criterionText2.Text = "nieznacznie bardziej preferowany";
+                    criterionText.Text += "nieznacznie bardziej preferowany";
                     break;
                 case 1:
-                    criterionText2.Text = "silniej preferowany";
+                    criterionText.Text += "silniej preferowany";
                     break;
                 case 2:
-                    criterionText2.Text = "bardzo silnie preferowany";
+                    criterionText.Text += "bardzo silnie preferowany";
                     break;
                 case 3:
-                    criterionText2.Text = "wyłącznie preferowany";
+                    criterionText.Text += "wyłącznie preferowany";
                     break;
                 default:
-                    criterionText2.Text = "tak samo preferowany";
+                    criterionText.Text += "tak samo preferowany";
                     break;
             }
+
+            if (criterion1.Checked)
+                criterionText.Text += string.Format(" niż\nwariant \"{0}\"", ahp.secondDecisionComparision());
+            else
+                criterionText.Text += string.Format(" niż\nwariant \"{0}\"", ahp.firstDecisionComparision());
+
         }
     }
 }
