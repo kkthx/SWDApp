@@ -146,13 +146,10 @@ namespace SWDApp
         public AHP(List<string> initCriterions, List<string> initDecisions)
         {
             currentDecisionCount = 0;
-            //criterionMatrix = new ComparisionMatrix(new List<string>(new string[] {"Wygoda", /*"Waga", */"Wodoodporność", "Budowa" }));
             criterionMatrix = new ComparisionMatrix(initCriterions);
             decisionMatrix = new List<ComparisionMatrix>();
             for (int i = 0; i < criterionMatrix.Count; i++)
             {
-                //ComparisionMatrix c = new ComparisionMatrix
-                //  (new List<string>(new string[] { /*"HIMOUNTAIN TAWOCHE 35+10", */"SALEWA MOUNTAIN GUIDE PRO 38", "OSPREY VARIANT 37" }));
                 ComparisionMatrix c = new ComparisionMatrix(initDecisions);
                 decisionMatrix.Add(c);
             }

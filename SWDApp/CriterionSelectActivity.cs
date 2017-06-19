@@ -63,7 +63,6 @@ namespace SWDApp
             textView1.Text = "";
 
             title.Text = "Wybór kryteriów";
-            title.Text += string.Format("\ndeccnt={0} critcnt={1}\n", ahp.decisionCount, ahp.criterionCount);
             description.Text = "Zdecyduj, które kryterium jest ważniejsze";
 
             criterion1.Text = ahp.firstCriterion();
@@ -72,31 +71,6 @@ namespace SWDApp
 
             criterionText.Text = string.Format("Kryterium \"{0}\" \n jest tak samo preferowane względem\nkryterium \"{1}\"", ahp.firstCriterion(), ahp.secondCriterion());
             criterionText2.Text = "";
-
-         /*   textView1.Text = string.Format(
-    "{0:0.00}   {1:0.00}   {2:0.00}   {3:0.00}\n" +
-    "{4:0.00}   {5:0.00}   {6:0.00}   {7:0.00}\n" +
-    "{8:0.00}   {9:0.00}   {10:0.00}   {11:0.00}\n" +
-    "{12:0.00}   {13:0.00}   {14:0.00}   {15:0.00}\n",
-    ahp.criterionRank(0, 0),
-    ahp.criterionRank(0, 1),
-    ahp.criterionRank(0, 2),
-    ahp.criterionRank(0, 3),
-    ahp.criterionRank(1, 0),
-    ahp.criterionRank(1, 1),
-    ahp.criterionRank(1, 2),
-    ahp.criterionRank(1, 3),
-    ahp.criterionRank(2, 0),
-    ahp.criterionRank(2, 1),
-    ahp.criterionRank(2, 2),
-    ahp.criterionRank(2, 3),
-    ahp.criterionRank(3, 0),
-    ahp.criterionRank(3, 1),
-    ahp.criterionRank(3, 2),
-    ahp.criterionRank(3, 3)
-
-    );*/
-
 
             radioGroup.CheckedChange += (object sender, RadioGroup.CheckedChangeEventArgs e) =>
             {
@@ -109,8 +83,6 @@ namespace SWDApp
                 else
                 {
                     seekBar1.Enabled = true;
-
-
                     criterionTextAssign(seekBar1.Progress);
                 }
             };
@@ -147,17 +119,6 @@ namespace SWDApp
                     StartActivity(typeof(CriterionSelectActivity));
                 else
                 {
-                   /* textView1.Text = string.Format(
-"sum  {0:0.00}   {1:0.00}   {2:0.00}   {3:0.00}\n" +
-"avg {4:0.00}   {5:0.00}   {6:0.00}   {7:0.00}\n" +
-"ci {8:0.00}   ",
-
-ahp.sum(0), ahp.sum(1), ahp.sum(2), ahp.sum(3),
-ahp.avg(0), ahp.avg(1), ahp.avg(2), ahp.avg(3),
-ahp.ci
-
-);*/
-
                     Toast.MakeText(this, "Go to decision comparision matrix", ToastLength.Short).Show();
                     StartActivity(typeof(DecisionSelectActivity));
                 }

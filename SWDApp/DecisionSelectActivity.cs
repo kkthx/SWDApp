@@ -38,14 +38,8 @@ namespace SWDApp
         {
             base.OnCreate(savedInstanceState);
 
-            //test if all criterions selected
             SetContentView(Resource.Layout.Selector);
-            //else go next
-            //StartActivity(typeof(DecisionSelectActivity));
 
-
-
-            //get data from previous activity, deserializing it to object
             ahp = MyApp.ahp;
 
             seekBar1 = FindViewById<SeekBar>(Resource.Id.seekBar1);
@@ -77,22 +71,6 @@ namespace SWDApp
 
             criterionText.Text = string.Format("Wariant \"{0}\"\njest tak samo preferowany względem\nwariantu \"{1}\"", ahp.firstDecisionComparision(), ahp.secondDecisionComparision());
             criterionText2.Text = "";
-
-         /*   textView1.Text = string.Format(
-"{0:0.00}   {1:0.00}   {2:0.00}\n" +
-"{3:0.00}   {4:0.00}   {5:0.00}\n" +
-"{6:0.00}   {7:0.00}   {8:0.00}\n",
-ahp.decisionRank(ahp.currentDecisionCount, 0, 0),
-ahp.decisionRank(ahp.currentDecisionCount, 0, 1),
-ahp.decisionRank(ahp.currentDecisionCount, 0, 2),
-ahp.decisionRank(ahp.currentDecisionCount, 1, 0),
-ahp.decisionRank(ahp.currentDecisionCount, 1, 1),
-ahp.decisionRank(ahp.currentDecisionCount, 1, 2),
-ahp.decisionRank(ahp.currentDecisionCount, 2, 0),
-ahp.decisionRank(ahp.currentDecisionCount, 2, 1),
-ahp.decisionRank(ahp.currentDecisionCount, 2, 2)
-);*/
-
 
             radioGroup.CheckedChange += (object sender, RadioGroup.CheckedChangeEventArgs e) =>
             {
@@ -148,18 +126,6 @@ ahp.decisionRank(ahp.currentDecisionCount, 2, 2)
                 }
                 else
                 {
-                  /*  textView1.Text = string.Format(
-"sum  {0:0.00}   {1:0.00}   {2:0.00}   {3:0.00}\n" +
-"avg {4:0.00}   {5:0.00}   {6:0.00}   {7:0.00}\n" +
-"ci {8:0.00}   ",
-
-ahp.sum(0), ahp.sum(1), ahp.sum(2), ahp.sum(3),
-ahp.avg(0), ahp.avg(1), ahp.avg(2), ahp.avg(3),
-ahp.ci
-
-);*/
-
-                    //Toast.MakeText(this, "FINISHED", ToastLength.Short).Show();
                     StartActivity(typeof(CalculatedRank));
                 }
             };

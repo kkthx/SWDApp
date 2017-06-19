@@ -32,8 +32,6 @@ namespace SWDApp
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.InitialSelector);
 
-            //ahp = MyApp.ahp;
-
             title = FindViewById<TextView>(Resource.Id.title);
             description = FindViewById<TextView>(Resource.Id.description);
 
@@ -47,7 +45,7 @@ namespace SWDApp
             title.Text = "Wybór kryteriów";
             description.Text = "Wybierz kryteria które cię interesują";
 
-            List<string> criterions = new List<string>();// (new string[] { "Wygoda", "Waga", "Wodoodporność", "Budowa" });
+            List<string> criterions = new List<string>();
             List<string> decisions = new List<string>
                 (new string[] { "HIMOUNTAIN TAWOCHE 35+10", "SALEWA MOUNTAIN GUIDE PRO 38", "OSPREY VARIANT 37" });
 
@@ -78,9 +76,6 @@ namespace SWDApp
                 }
                 else
                 {
-                    //criterions = new List<string>(new string[] { "Wygoda", "Waga", "Wodoodporność", "Budowa" });
-                    //decisions = new List<string>(new string[] { "HIMOUNTAIN TAWOCHE 35+10", "SALEWA MOUNTAIN GUIDE PRO 38", "OSPREY VARIANT 37" });
-
                     MyApp.ahp = new AHP(criterions, decisions);
                     StartActivity(typeof(CriterionSelectActivity));
                 }
